@@ -36,6 +36,21 @@ chain = prompt | llm
 # --------------------------------------
 app = FastAPI(title="简历优化助手API")
 
+@app.get("/")
+def read_root():
+    return {
+        "message": "简历优化助手 API",
+        "description": "这是一个基于 FastAPI 和 DeepSeek 大模型的简历优化服务",
+        "usage": {
+            "endpoint": "/optimize",
+            "method": "POST",
+            "body": {
+                "resume_text": "你的简历文本内容"
+            }
+        },
+        "docs": "访问 /docs 查看完整的 API 文档"
+    }
+
 # 定义请求体结构
 class ResumeRequest(BaseModel):
     resume_text: str
